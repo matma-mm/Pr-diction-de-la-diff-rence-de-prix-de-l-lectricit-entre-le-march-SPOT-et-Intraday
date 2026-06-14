@@ -59,17 +59,13 @@ Les variables les plus pertinentes pour la prédiction du prix SPOT sont donc :
 
 ```
 LinearRegression()
-Score R² : 0.734 (73.4% de variance expliquée)
 ```
 
 ### Random Forest Regressor
 
 ```
 RandomForestRegressor(n_estimators=10)
-Score R² : 0.961 (96.1% de variance expliquée)
 ```
-
-Conclusion : Le Random Forest surpasse nettement la régression linéaire, suggérant des relations non-linéaires entre les features et le prix SPOT.
 
 ## Méthodologie
 
@@ -138,23 +134,6 @@ model.fit(X_train, y_train)
 predictions = model.predict(X_test)
 ```
 
-## Résultats et interprétations
-
-- Le modèle Random Forest atteint un R² de 0.961, indiquant une excellente capacité de prédiction
-- La demande prévue est le facteur le plus influent sur le prix SPOT
-- Les sources d'énergie renouvelable (éolien, solaire) ont un impact secondaire mais significatif
-- Les relations non-linéaires entre les variables justifient l'utilisation d'ensemble methods
-
-## Perspectives d'amélioration
-
-- Ajouter des features temporelles (heure, jour de la semaine, saison)
-- Tester des modèles plus avancés (Gradient Boosting, XGBoost)
-- Utiliser des données plus récentes
-- Implémenter une validation croisée pour évaluer la stabilité du modèle
-- Analyser les résidus pour identifier les patterns manqués
-- Développer des modèles spécifiques par saison
-
-## Notes
 
 - Toutes les données sont en format UTC avec décalage horaire (+00:00)
 - Les valeurs manquantes en début de période reflètent probablement un délai de disponibilité des données réelles
