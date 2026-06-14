@@ -59,7 +59,6 @@ Les variables les plus pertinentes pour la prédiction du prix SPOT sont donc :
 
 ```
 LinearRegression()
-Score R² : 0.734 (73.4% de variance expliquée)
 ```
 
 Performance : Performance de base, inadéquate pour capturer les relations complexes du système électrique.
@@ -68,7 +67,6 @@ Performance : Performance de base, inadéquate pour capturer les relations compl
 
 ```
 RandomForestRegressor(n_estimators=10)
-Score R² : 0.961 (96.1% de variance expliquée)
 ```
 
 Performance : Excellente, avec une amélioration massive par rapport à la régression linéaire. Le modèle capture efficacement les relations non-linéaires entre les variables.
@@ -77,18 +75,9 @@ Performance : Excellente, avec une amélioration massive par rapport à la régr
 
 ```
 XGBRegressor()
-Version : xgboost >= 2.1.3
 ```
 
 Performance : À tester et comparer avec Random Forest. Ce modèle peut potentiellement offrir une meilleure généralization et une meilleure capture des interactions entre variables.
-
-## Comparaison des modèles
-
-| Modèle | Score R² | Avantages | Inconvénients |
-|--------|----------|-----------|---------------|
-| Régression linéaire | 0.734 | Simple, rapide | Peu de flexibilité |
-| Random Forest | 0.961 | Excellent score, capture les non-linéarités | Risque de surapprentissage |
-| XGBoost | À évaluer | Robustesse, régularisation intégrée | Plus complexe à tuner |
 
 ## Méthodologie
 
@@ -175,30 +164,6 @@ predictions_rf = model.predict(X_test[['load_forecast', 'nucelear_power_availabl
 # XGBoost
 predictions_xgb = model_xgb.predict(X_test[['load_forecast', 'nucelear_power_available', 'wind_power_forecasts_average']])
 ```
-
-## Résultats et interprétations
-
-- Le modèle Random Forest atteint un R² de 0.961, indiquant une excellente capacité de prédiction
-- La demande prévue est le facteur le plus influent sur le prix SPOT
-- Les sources d'énergie renouvelable (éolien, solaire) ont un impact secondaire mais significatif
-- Les relations non-linéaires entre les variables justifient l'utilisation de modèles ensemble (Random Forest, XGBoost)
-
-## Perspectives d'amélioration
-
-- Ajouter des features temporelles (heure, jour de la semaine, saison)
-- Appliquer l'hyperparamètre tuning sur XGBoost (learning_rate, max_depth, n_estimators)
-- Utiliser des données plus récentes
-- Implémenter une validation croisée pour évaluer la stabilité du modèle
-- Analyser les résidus pour identifier les patterns manqués
-- Développer des modèles spécifiques par saison
-- Tester des modèles hybrides combinant Random Forest et XGBoost
-
-## Notes
-
-- Toutes les données sont en format UTC avec décalage horaire (+00:00)
-- Les valeurs manquantes en début de période reflètent probablement un délai de disponibilité des données réelles
-- Le modèle actuel ne tient pas compte de la saisonnalité explicite
-- XGBoost offre généralement une meilleure régularisation mais nécessite un tuning des hyperparamètres
 
 ## Auteur
 
